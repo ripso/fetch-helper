@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "commonjs",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "target": "es6",
+    "experimentalDecorators": true,
+    "stripInternal": true,
+    "allowJs": false,
+    "esModuleInterop": true,
+    "strict": true,
+    "declaration": true,
+    "inlineSourceMap": true,
+    "baseUrl": "./src"
+  },
+  "include": [
+    "**/*.ts",
+  ]
+}
