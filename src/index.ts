@@ -20,7 +20,7 @@ export const get = async (url: URL | string, params: StringObject | null = null,
   return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const post = async (url: URL | string, params: any, headers?: StringObject): Promise<Response> => {
+export const post = async (url: URL | string, params: any = {}, headers?: StringObject): Promise<Response> => {
   const cleanedUrl = toUrl(url)
 
   const requestOptions = {
@@ -34,7 +34,7 @@ export const post = async (url: URL | string, params: any, headers?: StringObjec
   return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const put = async (url: URL | string, params: any, headers: StringObject): Promise<Response> => {
+export const put = async (url: URL | string, params: any = {}, headers?: StringObject): Promise<Response> => {
   const cleanedUrl = toUrl(url)
 
   const requestOptions = {
@@ -48,7 +48,7 @@ export const put = async (url: URL | string, params: any, headers: StringObject)
   return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const del = async (url: URL | string, headers: StringObject): Promise<Response> => {
+export const del = async (url: URL | string, headers?: StringObject): Promise<Response> => {
   const cleanedUrl = toUrl(url)
 
   const requestOptions = {
