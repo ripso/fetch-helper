@@ -1,6 +1,15 @@
+import fetch from 'cross-fetch'
+
 export type StringObject = Record<string, string>
 
-const toUrl = (url: URL | string): URL => typeof url === 'string' ? new URL(url) : url
+const toUrl = (url: URL | string): URL => {
+  try {
+    return typeof url === 'string' ? new URL(url) : url
+  } catch (error) {
+    console.error(`Invalid URL : ${typeof url === 'string' ? url : url.href}`)
+    throw error
+  }
+}
 
 export const get = async (url: URL | string, params: StringObject | null = null, headers?: StringObject): Promise<Response> => {
   const cleanedUrl = toUrl(url)
