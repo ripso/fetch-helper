@@ -1,6 +1,10 @@
 export type StringObject = Record<string, string>
 
-export const get = async (url: URL, params: StringObject | null = null, headers?: StringObject): Promise<Response> => {
+const toUrl = (url: URL | string): URL => typeof url === 'string' ? new URL(url) : url
+
+export const get = async (url: URL | string, params: StringObject | null = null, headers?: StringObject): Promise<Response> => {
+  const cleanedUrl = toUrl(url)
+
   const requestOptions = {
     method: 'GET',
     headers
@@ -9,14 +13,16 @@ export const get = async (url: URL, params: StringObject | null = null, headers?
   if (params != null) {
     Object.keys(params)
       .forEach(key => {
-        url.searchParams.append(key, params[key])
+        cleanedUrl.searchParams.append(key, params[key])
       })
   }
 
-  return await fetch(url.href, requestOptions)
+  return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const post = async (url: URL, params: any, headers?: StringObject): Promise<Response> => {
+export const post = async (url: URL | string, params: any, headers?: StringObject): Promise<Response> => {
+  const cleanedUrl = toUrl(url)
+
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -25,10 +31,12 @@ export const post = async (url: URL, params: any, headers?: StringObject): Promi
     },
     body: JSON.stringify(params)
   }
-  return await fetch(url.href, requestOptions)
+  return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const put = async (url: URL, params: any, headers: StringObject): Promise<Response> => {
+export const put = async (url: URL | string, params: any, headers: StringObject): Promise<Response> => {
+  const cleanedUrl = toUrl(url)
+
   const requestOptions = {
     method: 'PUT',
     headers: {
@@ -37,13 +45,15 @@ export const put = async (url: URL, params: any, headers: StringObject): Promise
     },
     body: JSON.stringify(params)
   }
-  return await fetch(url.href, requestOptions)
+  return await fetch(cleanedUrl.href, requestOptions)
 }
 
-export const del = async (url: URL, headers: StringObject): Promise<Response> => {
+export const del = async (url: URL | string, headers: StringObject): Promise<Response> => {
+  const cleanedUrl = toUrl(url)
+
   const requestOptions = {
     method: 'DELETE',
     headers
   }
-  return await fetch(url.href, requestOptions)
+  return await fetch(cleanedUrl.href, requestOptions)
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ripso/fetch-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fetch helper",
   "main": "dist/index.min.js",
   "types": "dist/index.d.ts",
